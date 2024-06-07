@@ -44,12 +44,14 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
+
 	defer conn.Close()
 
 	clients[conn] = true
 
 	for {
 		var msg Message
+
 		err := conn.ReadJSON(&msg)
 		if err != nil {
 			fmt.Println(err)
